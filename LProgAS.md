@@ -88,4 +88,55 @@ lw $t1, 0($s0)
 Encontre uma forma para que cada um dos bits de um registrador seja negado (seja argumento de um
 operador de negação lógica).
 
+### Resposta:
+função nor $rd, $rs, $rt
+exp:
+nor $s0, $s0, $s0
 
+## Exercicio 5
+---
+Quais são as possíveis consequências se as seguintes instruções são aplicadas em sequência:
+- sll $1, $1, #0x01
+- srl $1, $1, #0x01
+e no caso da sequência seguinte:
+- sll $1, $1, #0x01
+- sra $1, $1, #0x01
+
+### Resposta:
+- sll $1, $1, #0x01
+- srl $1, $1, #0x01
+
+como srl é para numeros sem sinal, o numero vai ser restaurado sendo positivo e vai mudar caso negativo
+
+- sll $1, $1, #0x01
+- sra $1, $1, #0x01
+como sra é para numeros com sinal, o numero vai ser restaurado sendo positivo ou negativo
+
+## Exercicio 6
+---
+Elabore um programa em linguagem Assembly MIPS para determinar o valor lógico do n-th bit de uma
+palavra. Elabore alternativas ao programa proposto.
+
+### Resposta:
+palavra = 0x12345678
+```asm
+// carragar a palavra
+lui $t0, 0x1234
+ori $t0, $t0, 0x5678
+
+// carregar a posição do bit
+ori $t1, $t1, 0x5 // exp posição 5
+
+// colocar mascara numero 1 na posição desejada
+lui $t2, 0x1
+sll $t2, $t2, $t1 // desloca $t2 para posição 5
+
+// pegar n-th bit
+and $t3, $t0, $t2
+ 
+bne $t3, $zero, Ligado
+lui $v0, 0x0
+
+Ligado:
+  lui $v0, 0x1
+```
