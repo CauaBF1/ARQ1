@@ -51,6 +51,15 @@ sb $t4, 0($s0) // 0x00FF158C
 sb $t3, 1($s0) // 0x00FF158D
 sb $t2, 0($s1) // 0x00FF158E
 ```
+
+```asm
+sll $t1, $t1, 8
+lw $t2, 0($so)
+andi $t2, $t2, 0xFF
+or $t1, $t1, $t2
+sw $t1, 0($so)
+```
+
 #### Codigo Kevin:
 
 ```asm
