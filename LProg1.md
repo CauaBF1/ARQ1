@@ -35,21 +35,21 @@ MEM1 = 0x00FF158C 0x00FF158D 0x00FF158E
 
  - Pego LSB
 
- - Coloca dentro de $s0 o valor que estava em $t2
+ - Coloca dentro de $s0 o valor que estava em $t4
  - Coloca dentro de $s0+1 o valor que estava em $t3
- - Coloca dentro de $s1 o valor que estava em $t4
+ - Coloca dentro de $s1 o valor que estava em $t2
 
 
 ```asm
-andi $t2 $t1 0xFF // 55
+andi $t2 $t1 0xFF // 00
 srl $t3 $t1 8 
 andi $t3 $t3 0xFF // F2
 srl $t4 $t1 16
-andi $t4 $t4 0xFF // 00
+andi $t4 $t4 0xFF // 55
 
-sb $t2, 0($s0) // 0x00FF158C
+sb $t4, 0($s0) // 0x00FF158C
 sb $t3, 1($s0) // 0x00FF158D
-sb $t4, 0($s1) // 0x00FF158E
+sb $t2, 0($s1) // 0x00FF158E
 ```
 #### Codigo Kevin:
 
