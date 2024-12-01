@@ -27,13 +27,50 @@ addi $9, $zero, -1 // 0xFFFFFFF
 (fim)
 	end
 
+
 # Nao precisa desse errou se colocar $9 como -1 padrao
 #(errou)
 #	bne $8, $zero, loop
 #	addi $9, $zero, 0xFF_FF_FF_FF
 ```
 
+**Funcionando MARS**
+```asm
+.data
+
+.text
+
+.macro end
+	li $v0, 10
+	syscall
+.end_macro
+
+.globl main
+
+main:
+	li $t8, 0x01200160 # 0000_0001_0010_0000_0000_0001_0110_0000 deve retornar posição 6
+	li $t0, -1 # valor padrao dentro do $9
+	addi $t1, $zero, 3 # valor 011 para mascara
+	addi $t2, $zero, 0 #contador de indice
+
+loop:
+	and $t3, $t1, $t8 # verifico os dois bits do meu numero X(t8)
+	beq $t3, $t1, achou # se meu $t3 voltar 11 é pq achou
+	addi $t2, $t2, 1 #aumento meu contador 
+	srl $t8, $t8, 1 # desloco um bit p direita
+	bne $t8, $zero, loop # se $8 virou zero é pq ja deslocou tudo
+	j fim
+	
+achou:
+	addi $t2, $t2, 1
+	add $t0, $zero,$t2 #coloca contador no $9($t0)
+
+fim:
+	end 
+```
+
 ## Exercicio 2
+---
 Considere um computador MC. Sua arquitetura é do tipo registrador-registrador. No ciclo de busca somente uma leitura é executada. A memória é endereçada byte-a-byte e alinhada. Alguns outros parametros de seu projetor são:
  - NR: numero de registradores acessador pelo programador
  - NRI: numero de bits do registrador de instrução
