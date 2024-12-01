@@ -68,7 +68,7 @@ OPÇÃO E:
 
 OPÇÃO B:
 - lw $s2, 0($s0)
-- sll $st1, $st1, 8
+- sll $t1, $t1, 8x
 - adi $s3, $zero, 0x0F
 - and $s3, $s2, $s3
 - add $s3, $s3, $t1
