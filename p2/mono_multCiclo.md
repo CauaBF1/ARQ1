@@ -72,12 +72,13 @@ j = 3*200 = 600ns *514 = 324000
 
 # Exercicio 4:
 
+Precisa de outro banco de registradores para ler conteudo de $rd e sair para MUX criado
 Sinal de controle adicional: Adicionar um sinal de controle chamado CIFMOVE na unidade de controle para identificar a nova instrução.
 Banco de registradores: Não é necessário um banco de registradores auxiliar. O banco de registradores existente já permite leitura e escrita em $rd, $rs e $rt.
-MUX na entrada 1 do banco de registradores: Adicionar um MUX antes da entrada 1 do BR. Ele terá duas entradas:
+MUX na entrada A da ULA: Adicionar um MUX antes da entrada A da ULA. Ele terá duas entradas:
 
-    Entrada 0: referencia de $rs (para operações normais).
-    Entrada 1: referencia de $rd (quando a instrução for CIFMOVE).
+    Entrada 0: valor de $rs (para operações normais).
+    Entrada 1: valor de $rd (quando a instrução for CIFMOVE).
     O controle desse MUX será ativado pelo sinal CIFMOVE.
 
 Comparador para verificar $rs > 0: Inserir um comparador que verifica se o valor de $rs é maior que zero ($rs > 0). A saída será binária:
